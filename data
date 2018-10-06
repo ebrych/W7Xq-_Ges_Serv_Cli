@@ -1,0 +1,27 @@
+
+ <label>Fecha:</label>
+            <form #listaForm="ngForm" (ngSubmit)="llamarLista(listaForm)" class="form-inline">
+              <input type="date"  class="form-control" name="dateData" id="dateData" [(ngModel)]="hoy">
+              <button type="submit" class="btn btn-primary ">buscar</button>
+            </form>
+
+
+
+
+
+<form #listaForm="ngForm" (ngSubmit)="llamarLista(listaForm)">
+                <div class="col-sm-6">
+                    <input type="date"  class="form-control" name="dateData" id="dateData" [(ngModel)]="hoy">
+                </div>
+                <div class="col-sm-6">
+                    <button type="submit" class="btn btn-primary" style="width: 100%">buscar</button>
+                </div>
+            </form>
+
+
+
+
+
+else if(res[0].datos == 0){
+        $('#modalBody').html('Tarea Cancelada');
+      }

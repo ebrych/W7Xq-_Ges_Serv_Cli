@@ -1,0 +1,121 @@
+
+<p>&nbsp;</p>
+<div class="container">
+  <h1>Personal</h1> 
+  <div style="font-size:20px;color:#007bff;cursor: pointer;" (click)="abrirModalRegistro()"><i class="fas fa-plus-circle"></i> Agregar Personal </div>
+ 
+<p>&nbsp;</p>
+
+    <div class="list-group">
+        <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{data.nombres}}</h5>
+            <small><i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i></small>
+        </div>
+        <p class="mb-1"><i class="fas fa-address-card"></i> {{data.cargo}}</p>
+        <p class="mb-1"><i class="fas fa-map-marker"></i> {{data.local}}</p>
+        <p class="mb-1"><i class="fas fa-at"></i> {{data.email}}</p>
+        <p class="mb-1"><i class="fas fa-phone-square"></i> {{data.telefono}}</p>
+        <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+        </div>
+  </div>
+
+</div>
+
+
+
+
+ 
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registro</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha de Registro de personal</label>
+          <br/>
+          <form #insertaForm="ngForm" (ngSubmit)="inserta(insertaForm)">
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="nombre" id="nombre"  placeholder="Nombres Completos" required ngModel>
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Correo Electrónico" required ngModel>
+              <label>Telefono</label>
+              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" ngModel>
+              <label>Local</label>
+              <select class="form-control" name="local" id="local"  required ngModel>
+                  <option *ngFor="let data of localesList" value="{{data.id}}">{{data.nombres}}</option>
+              </select>
+              <label>Cargo</label>
+              <select class="form-control" name="cargo" id="cargo"  required ngModel>
+                  <option *ngFor="let data of cargosList" value="{{data.id}}">{{data.descripcion}}</option>
+              </select>
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" required ngModel>
+                  <option value="1">Activo</option>
+                  <option value="1">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Registrar Personal</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Edita Registrar -->
+<div class="modal fade" id="ModalEditaRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha de Personal</label>
+          <br/>
+          <form #actualizaForm="ngForm" (ngSubmit)="actualiza(actualizaForm)">
+
+              <input type="text" class="form-control" name="id" id="id" style="display:none" ngModel="{{idUs}}"  required>
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="nombres" id="nombreUs" placeholder="Nombres Completos" ngModel="{{nombreUs}}"  required>
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" id="email" placeholder="Correo Electrónico" ngModel="{{emailUs}}" required>
+              <label>Telefono</label>
+              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" ngModel="{{phoneUs}}" >
+              <label>Local</label>
+              <select class="form-control" name="local" id="local" ngModel="{{localIdUs}}"   required>
+                  <option *ngFor="let data of localesList" value="{{data.id}}">{{data.nombres}}</option>
+              </select>
+              <label>Cargo</label>
+              <select class="form-control" name="cargo" id="cargo" ngModel="{{cargoIdUs}}"  required>
+                  <option *ngFor="let data of cargosList" value="{{data.id}}">{{data.descripcion}}</option>
+              </select>
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" ngModel="{{estIdUs}}" required>
+                  <option value="1">Activo</option>
+                  <option value="1">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Actualizar</button> 
+          </form>
+          
+          <p>&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+

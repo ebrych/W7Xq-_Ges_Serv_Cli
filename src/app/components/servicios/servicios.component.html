@@ -1,0 +1,133 @@
+<p>&nbsp;</p>
+<div class="container">
+    <h1>Servicios</h1> 
+    <div style="font-size:20px;color:#007bff;cursor: pointer;" (click)="abrirModalNuevo()"><i class="fas fa-plus-circle"></i> Agregar Servicio </div>
+
+    <p>&nbsp;</p>
+
+    <div class="list-group">
+      <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{data.descripcion}}</h5>
+          <small>
+            <i class="fas fa-cube" (click)="abrirInsumos(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+            &nbsp;&nbsp;
+            <i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+          </small>
+        </div>
+        <p class="mb-1"><i class="fas fa-wallet"></i> {{data.categoria}}</p>
+        <p class="mb-1"><i class="fas fa-dollar-sign"></i> {{data.costo}}</p>
+        <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+      </div>
+    </div>
+</div> 
+
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Servicio</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body"> 
+        <label style="color:#bdc3c7">Ficha de Registro de Servicios</label>
+        <br/>
+        <form #insertaForm="ngForm" (ngSubmit)="inserta(insertaForm)">
+          <label>Nombre</label>
+          <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required ngModel>
+          <label>Categoria</label>
+          <select class="form-control" name="categoria" id="categoria" required ngModel>
+            <option value="" disabled selected>Categoria Precio</option>
+            <option *ngFor="let data of tipoPrecio" value="{{data.id}}">{{data.descripcion}}</option>
+          </select>
+          <label>Costo</label>
+          <input type="text" class="form-control" name="costo" id="costo" placeholder="S/." required ngModel>
+          <label>Estado</label>
+          <select class="form-control" name="estado" id="estado" required ngModel>
+            <option value="1" selected>Activo</option>
+            <option value="0">Inactivo</option>
+          </select><br/>
+          <button class="btn btn-primary btn-block" type="submit">Registrar Servicio</button>
+        </form>
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar -->
+<div class="modal fade" id="ModalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha Edición de Servicio</label>
+          <br/>
+          <form #actualizaForm="ngForm" (ngSubmit)="actualiza(actualizaForm)">
+              <input type="text" class="form-control" name="idServicio" id="idServicio" style="display: none" required ngModel="{{servId}}">
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Descripcion" required ngModel={{servDescripcion}}>
+              <label>Categoria</label>
+              <select class="form-control" name="categoria" id="categoria" required ngModel={{servCat}}>
+                <option value="" disabled selected>Categoria Precio</option>
+                <option *ngFor="let data of tipoPrecio" value="{{data.id}}">{{data.descripcion}}</option>
+              </select>
+              <label>Costo</label>
+              <input type="text" class="form-control" name="costo" id="costo" placeholder="Costo" required ngModel={{setvCost}}>
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" required ngModel={{servEst}}>
+                <option value="1" selected>Activo</option>
+                <option value="0">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Guardar Datos</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal insumos -->
+<div class="modal fade" id="ModalInsumos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Insumos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Insumos para el Servicio</label>
+          <br/>
+          <form #insimosForm="ngForm" (ngSubmit)="insertaInsumo(insimosForm)">
+              <input type="text" class="form-control" name="idServicio" id="idServicio" style="display:none" ngModel="{{servId}}" />
+              <label>Insumo</label>
+              <select class="form-control" name="idInsumo" id="idInsumo" ngModel required>
+                  <option *ngFor="let data of insumos" value="{{data.id}}">{{data.nombre}} / {{data.descripcion}}</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Agregar Insumo</button> 
+          </form>
+          <br/>
+          <hr/>
+          <label style="color:#bdc3c7">Lista de Permisos</label>
+          <div class="row" *ngFor="let data of misInsumos">
+            <div class="col-9">{{data.nombre}}<br/>{{data.descripcion}} </div>
+            <div class="col-3" align="center"><i class="fas fa-trash" (click)="eliminaInsumo(data.idServicio,data.idInsumo)" style="font-size:20px;color:#007bff;cursor: pointer;"></i></div>
+          </div>
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>

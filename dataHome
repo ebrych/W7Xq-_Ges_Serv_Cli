@@ -1,0 +1,81 @@
+
+<div class="container">
+    <div style="padding-top: 30px;padding-bottom: 30px;"></div>
+    <form class="form-signin" #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+        <div align="center">
+          <img class="mb-4" src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+        </div>
+        <label style="color:#bdc3c7">Iniciar Sesión</label>
+        <input type="text" id="inputEmail" class="form-control" name="user" id="user" placeholder="Usuario" required autofocus ngModel>
+        <input type="password" id="inputPassword" class="form-control" name="pass" id="pass" placeholder="Contraseña" required ngModel>
+        <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+        <br/><br/>
+        <button class="btn btn-primary btn-block" type="button" style="background-color:#3b5998 ;border-color:#3b5998"><i class="fab fa-facebook-f"> </i> facebook</button> 
+        <button class="btn btn-primary btn-block" type="button" style="background-color:#d34836 ;border-color:#d34836"><i class="fab fa-google"> </i> google</button>  
+        
+        <hr style="margin-bottom: 5px;"/>
+          <div align="right"><label style="color:#bdc3c7;font-size: 17px;cursor: pointer" (click)="abrirModalRegistro()">Registrarse</label></div>
+          <div align="right" style="margin-top: -10px"><label style="color:#bdc3c7;font-size: 17px;cursor: pointer" (click)="abrirModalOlvidePs()">Olvide mi contraseña</label></div>
+      </form>
+      
+</div>
+
+
+
+
+
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Registrarse</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha de Registro</label>
+          <br/><br/>
+          <form>
+              <input type="text" class="form-control" placeholder="Nombres Completos" required><br/>
+              <input type="email" class="form-control" placeholder="Correo Electrónico" required><br/>
+              <input type="email" class="form-control" placeholder="Teléfono"><br/>
+              <input type="password" class="form-control" placeholder="Contraseña" required><br/>
+              <input type="password" class="form-control" placeholder="Repite la contraseña" required><br/>
+              <button class="btn btn-primary btn-block" type="submit">Registrarme</button> 
+          </form>
+          <hr/>
+          <label style="color:#bdc3c7;font-size: 15px">Registrate con redes sociales</label>
+          <button class="btn btn-primary btn-block" type="button" style="background-color:#3b5998 ;border-color:#3b5998"><i class="fab fa-facebook-f"> </i> facebook</button>
+          <button class="btn btn-primary btn-block" type="button" style="background-color:#d34836 ;border-color:#d34836"><i class="fab fa-google"> </i> google</button>
+          <p>&nbsp;</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Olvide Contraseña -->
+<div class="modal fade" id="ModalOlvide" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recuperar contraseña</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+            <label style="color:#bdc3c7">Información para la recuperación</label>
+            <br/><br/>
+            <form>
+                <input type="email" class="form-control" placeholder="Correo Electrónico" required><br/>
+                <button class="btn btn-primary btn-block" type="submit">Registrarme</button> 
+            </form>
+        </div>
+
+      </div>
+    </div>
+  </div>

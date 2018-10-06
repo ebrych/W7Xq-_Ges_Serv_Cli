@@ -1,0 +1,274 @@
+<p>&nbsp;</p>
+<div class="container">
+    <h1>Asignación de Tareas</h1> 
+    <div style="font-size:20px;color:#007bff;cursor: pointer;" (click)="abrirModalNuevo()"><i class="fas fa-plus-circle"></i> Agregar Tarea nueva </div>
+
+    <br/>
+    <div class="row">
+        <div class="col-sm">
+            <form #listaForm="ngForm" (ngSubmit)="llamarLista(listaForm)">
+            <div class="input-group">
+                <input type="date" class="form-control" name="dateData" id="dateData" [(ngModel)]="hoy">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit" id="button-addon3">Buscar</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="col-sm"></div> 
+        <div class="col-sm" align="right">
+          filtros
+        </div>
+    </div>
+
+<br/>
+    <div class="list-group">
+        <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{data.cliente}}</h5>
+            <div align="right">
+            <small>
+              <i class="fas fa-users" (click)="abrirModalTrabajadores(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+              &nbsp;
+              <i class="fas fa-hands-helping" (click)="abrirModalServicio(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+              &nbsp;
+              <i class="far fa-money-bill-alt" (click)="abrirModalPago(data.id)"  style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+              &nbsp;
+              <i class="fas fa-receipt" (click)="abrirModalRecibos(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+              <br/>
+              <i class="fas fa-ban" (click)="abrirModalCancela(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+            </small>
+            </div>
+          </div>
+          <p class="mb-1"><i class="fas fa-warehouse"></i> {{data.local}}</p>
+          <p class="mb-1"><i class="fas fa-calendar-alt"></i> {{data.fecha}}</p>
+          <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+        </div>
+      </div>
+
+</div> 
+
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nueva Tarea</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label style="color:#bdc3c7">Ficha de Registro de Tareas</label>
+        <br/>
+        <form #insertaForm="ngForm" (ngSubmit)="inserta(insertaForm)">
+          <label>Cliente</label>
+            <select class="form-control" name="cliente" id="cliente" required ngModel>
+                <option *ngFor="let data of misClientes" value="{{data.id}}" >{{data.nombres}}</option>
+            </select>
+          <label>Fecha</label>  
+          <input type="date" class="form-control" name="fecha" id="fecha"  ngModel="{{hoy}}" />
+          <label>Estados</label>
+            <select class="form-control" name="estado" id="estado" required ngModel>
+              <option value="1" selected>Activo</option>
+              <option value="0">Inactivo</option>
+            </select><br/>
+            <button class="btn btn-primary btn-block" type="submit">Registrar Insumo</button> 
+        </form>
+        
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Servicios -->
+<div class="modal fade" id="ModalServicios" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Servicios</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Lista de Servicios</label>
+          <form #insertaServForm="ngForm" (ngSubmit)="insertaServicioInTarea(insertaServForm)">
+              <input type="text" class="form-control" name="idtarea" id="idtarea" style="display: none"  ngModel="{{idTarea}}" />
+              <select class="form-control" name="idservicio" id="idservicio" ngModel required>
+                  <option *ngFor="let data of servicios" value="{{data.id}}">{{data.servicio}} / {{data.categoria}} / S/. {{data.costo}}</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Agregar Servicio</button>
+          </form>
+          <br/>
+          <label style="color:#bdc3c7">Lista de Servicios</label>
+          <div class="row" *ngFor="let data of misServicios">
+            <div class="col-9">{{data.descripcion}} </div>
+            <div class="col-3" align="center"><i class="fas fa-trash" (click)="eliminaServicio(data.idTarea,data.idServicio)" style="font-size:20px;color:#007bff;cursor: pointer;"></i></div>
+          </div>
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Pago -->
+<div class="modal fade" id="ModalPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Finalizacion de tarea</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label style="color:#bdc3c7">Esta Seguro de terminar la Tarea</label>
+        <div class="row" *ngFor="let data of resumenTarea">
+            <div class="col-6">
+              {{data.servicio}}
+            </div>
+            <div class="col">
+              {{data.categoria}}
+            </div>
+            <div class="col">
+              S/. {{data.costo}}
+            </div>
+        </div>
+        <br/>
+        <form #FinalizaForm="ngForm" (ngSubmit)="finalizarTarea(FinalizaForm)">
+            <input type="text" class="form-control" name="idTarea" id="idTarea" style="display:none" ngModel="{{idTarea}}" />
+            <button class="btn btn-primary btn-block" type="submit">Finalizar Tarea</button>
+        </form>
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Cancela -->
+<div class="modal fade" id="ModalCancelar" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label style="color:#bdc3c7">Esta Seguro de Cancelar la Tarea</label>
+        <form #cancelaForm="ngForm" (ngSubmit)="cancelarTarea(cancelaForm)">
+            <input type="text" class="form-control" name="idTarea" id="idTarea" style="display:none"  ngModel="{{idTarea}}" />
+            <button class="btn btn-primary btn-block" type="submit">Cancelar Tarea</button>
+        </form>
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Trabajadores -->
+<div class="modal fade" id="ModalTrabajadores" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Servicios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label style="color:#bdc3c7">Lista de Trabajadores</label>
+        <form #insertaTrabForm="ngForm" (ngSubmit)="insertaTrabajadorInTarea(insertaTrabForm)">
+            <input type="text" class="form-control" name="idtarea" id="idtarea" style="display: none"  ngModel="{{idTarea}}" />
+            <select class="form-control" name="idTrabajador" id="idTrabajador" ngModel required>
+                <option *ngFor="let data of trabajadores" value="{{data.id}}">{{data.nombres}}</option>
+            </select><br/>
+            <button class="btn btn-primary btn-block" type="submit">Agregar Trabajador</button>
+        </form>
+        <hr/>
+        <label style="color:#bdc3c7">Trabajadores para la tarea</label>
+        <div class="row" *ngFor="let data of misTrabajadores">
+          <div class="col-9">{{data.nombres}} </div>
+          <div class="col-3" align="center"><i class="fas fa-trash" (click)="eliminaTrabajador(data.tarea,data.idUser)" style="font-size:20px;color:#007bff;cursor: pointer;"></i></div>
+        </div>
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Recibos -->
+<div class="modal fade" id="ModalRecibos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Recibos</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div  class="modal-body">
+          <div id="msjComponent" align="center"></div>
+          <div id="modalBody">
+          <label style="color:#bdc3c7">Datos de Facturacion</label>
+          <div id="formBoleta">
+            <form #insertaBoletaForm="ngForm" (ngSubmit)="insertaBoleta(insertaBoletaForm)">
+                <input type="text" class="form-control" name="idtarea" id="idtarea" style="display: none"  ngModel="{{idTarea}}" />
+                <label>Serie</label>
+                <input type="text" class="form-control" name="serie" id="serie"   ngModel />
+                <label>Número</label>
+                <input type="text" class="form-control" name="numero" id="numero" ngModel />
+                <br/>
+                <button class="btn btn-primary btn-block" type="submit" >Agregar Comprobante</button>
+            </form>
+          </div>
+        <div id="contenPrint">
+              <div class="row" id="dtosBoleta" style="display: none">
+                  <div class="col-lg">Serie: {{serieBoleta}}</div>
+                  <div class="col-lg">Número: {{numBoleta}}</div>
+                  <div class="col-lg">fecha: {{fechaBoleta}}</div>
+              </div>
+              <br/>
+              <label style="color:#bdc3c7">Resumen</label>
+              <div class="row" *ngFor="let data of resumenTarea">
+                  <div class="col-6">
+                    {{data.servicio}}
+                  </div>
+                  <div class="col">
+                    {{data.categoria}}
+                  </div>
+                  <div class="col">
+                    S/. {{data.costo}}
+                  </div>
+              </div>
+              <hr/>
+              <div class="row">
+                  <div class="col-6"></div>
+                  <div class="col">SubTotal</div>
+                  <div class="col">S/. {{subTotalTarea}}</div>
+              </div>
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col">Igv</div>
+                <div class="col">S/. {{IgvTarea}}</div>
+              </div>
+              <div class="row">
+                <div class="col-6"></div>
+                <div class="col">Total</div>
+                <div class="col">S/. {{totalTarea}}</div>
+              </div>
+        </div>
+        <br/>
+          <button class="btn btn-primary btn-block" type="button" id="btnPrint" style="display: none">Imprimir Comprobante</button>
+        </div>
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>

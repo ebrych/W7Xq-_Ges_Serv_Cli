@@ -1,0 +1,25 @@
+<p>&nbsp;</p>
+<div class="container">
+    <h1>Reporte de Asistencias</h1> 
+
+    <br/>
+    <div class="row">
+        <div class="col-sm">
+            <form #listaForm="ngForm" (ngSubmit)="llamarLista(listaForm)">
+            <div class="input-group">
+                <input type="date" class="form-control" name="dateData" id="dateData" [(ngModel)]="hoy">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit" id="button-addon3">Buscar</button>
+                </div>
+              </div>
+            </form>
+        </div>
+        <div class="col-sm"></div> 
+        <div class="col-sm" align="right">
+          filtros
+        </div>
+    </div>
+<br/>
+    
+
+</div> 

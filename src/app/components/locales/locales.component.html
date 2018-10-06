@@ -1,0 +1,98 @@
+<p>&nbsp;</p>
+<div class="container">
+    <h1>Locales</h1> 
+    <div style="font-size:20px;color:#007bff;cursor: pointer;" (click)="abrirModalNuevo()"><i class="fas fa-plus-circle"></i> Agregar Local </div>
+
+    <p>&nbsp;</p>
+
+    <div class="list-group">
+      <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{data.nombres}}</h5>
+          <small><i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i></small>
+        </div>
+        <p class="mb-1"><i class="fas fa-map-marker-alt"></i> {{data.direccion}}</p>
+        <p class="mb-1"><i class="fas fa-phone-square"></i> {{data.telefono}}</p>
+        <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+      </div>
+    </div>
+    
+
+
+</div>
+
+
+
+
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Local</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha de Registro de Locales</label>
+          <br/>
+
+          <form #insertaForm="ngForm" (ngSubmit)="inserta(insertaForm)">
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Nombres del local" required ngModel>
+              <label>Dirección</label>
+              <input type="text" class="form-control" name="direccion" id="direccion" placeholder="Dirección" required ngModel>
+              <label>Teléfono</label>
+              <input type="text" class="form-control" name="telefono" id="telefono" placeholder="Teléfono" ngModel>
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" required ngModel>
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Registrar Local</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- Modal editar -->
+<div class="modal fade" id="ModalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha Edición de Local</label>
+          <br/>
+          <form #actualizaForm="ngForm" (ngSubmit)="actualiza(actualizaForm)">
+              <input type="text" class="form-control" name="idLocal" id="idLocal" style="display:none" required ngModel="{{localId}}">
+              <label>Nombre</label>
+              <input type="text" class="form-control" name="nombre" id="nombre"   required ngModel={{localName}}>
+              <label>Dirección</label>
+              <input type="text" class="form-control" name="direccion" id="direccion"  required ngModel="{{localDir}}">
+              <label>Telefono</label>
+              <input type="text" class="form-control" name="telefono" id="telefono"  ngModel ="{{localPhone}}">
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" required ngModel="{{localEstId}}" >
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Guardar Datos</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>

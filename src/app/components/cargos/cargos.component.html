@@ -1,0 +1,123 @@
+<p>&nbsp;</p>
+<div class="container">
+    <h1>Cargos</h1> 
+    <div style="font-size:20px;color:#007bff;cursor: pointer;" (click)="abrirModalNuevo()"><i class="fas fa-plus-circle"></i> Agregar Cargo </div>
+
+    <p>&nbsp;</p>
+
+    <div class="list-group">
+      <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{data.descripcion}}</h5>
+          <small>
+            <i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+            &nbsp;&nbsp;
+            <i class="fas fa-key" (click)="permisos(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+          </small>
+        </div>
+        <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+      </div>
+    </div>
+</div>
+
+
+
+<!-- Modal Registrar -->
+<div class="modal fade" id="ModalRegistro" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Cargo</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha de Registro de Cargos</label>
+          <br/>
+
+          <form #insertaForm="ngForm" (ngSubmit)="inserta(insertaForm)">
+              <label>Descripción</label>
+              <input type="text" class="form-control" name="descripcion" id="descripcion" placeholder="Nombres del Cargo" required ngModel>
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" required ngModel>
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Registrar Insumo</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+<!-- Modal editar -->
+<div class="modal fade" id="ModalEdicion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Ficha Edición de Local</label>
+          <br/>
+          <form #actualizaForm="ngForm" (ngSubmit)="actualiza(actualizaForm)">
+              <input type="text" class="form-control" name="idCargo" id="idCargo" style="display: none" required ngModel="{{cargoId}}">
+              <label>Descripción</label>
+              <input type="text" class="form-control" name="descripcion" id="descripcion"   required ngModel={{cargoDescrip}}>
+              <label>Estado</label>
+              <select class="form-control" name="estado" id="estado" required ngModel="{{cargoEstId}}" required>
+                  <option value="1">Activo</option>
+                  <option value="0">Inactivo</option>
+              </select><br/>
+              <button class="btn btn-primary btn-block" type="submit">Guardar Datos</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Permisos -->
+<div class="modal fade" id="ModalPermisos" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Permisos</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+          <label style="color:#bdc3c7">Agregar Permisos</label>
+        <form #agregaForm="ngForm" (ngSubmit)="insertaPermiso(agregaForm)">
+          <input type="text" class="form-control" name="idCargo" id="idCargo" style="display: none" required ngModel="{{cargoId}}"><br/>
+          <label>Permisos:</label>
+          <select class="form-control" name="idPermiso" id="idPermiso" ngModel required>
+              <option *ngFor="let data of permisosList" value="{{data.id}}">{{data.descripcion}}</option>
+          </select>
+          <br/>
+          <button class="btn btn-primary btn-block" type="submit">Agregar Permiso</button> 
+        </form>
+        <br/>
+        <hr/>
+        <label style="color:#bdc3c7">Lista de Permisos</label>
+          <div class="row" *ngFor="let data of misPermisos">
+            <div class="col-9">{{data.descripcion}}</div>
+            <div class="col-3" align="center"><i class="fas fa-trash" (click)="eliminaPermiso(cargoId,data.id)" style="font-size:20px;color:#007bff;cursor: pointer;"></i></div>
+          </div>
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
