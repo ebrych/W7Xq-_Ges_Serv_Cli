@@ -33,7 +33,7 @@ export class PersonalComponent implements OnInit {
   estIdUs;
   estUs;
 
-
+  codigoQr;
 
   id=localStorage.getItem('id');
   token=localStorage.getItem('token');
@@ -50,6 +50,11 @@ export class PersonalComponent implements OnInit {
 
   abrirModalEditaRegistro(){
     $('#ModalEditaRegistro').modal('show');
+  }
+
+  abrirModalCodigoQr(idUser){
+    this.obtenerCodigoQr(this.id,this.token,idUser);
+    $("#ModalCodigoQr").modal('show');
   }
 
   //peticiones
@@ -143,14 +148,6 @@ const req=this.http.post(this.baseApiUrl+'Personal/updatePersonal',body.toString
   err=>{console.log("Error ocurred")});
 }
 
-
-
-
-
-
-
-
-
 cargarLocales(id,token){
   let body = new URLSearchParams();
   body.set('id', id);
@@ -172,6 +169,21 @@ cargaCargos(id,token){
   };
   const req=this.http.post(this.baseApiUrl+'Cargos/SelectList',body.toString(), options)
   .subscribe(res=>{ this.cargosList= res; },
+  err=>{console.log("Error ocurred")});
+}
+
+obtenerCodigoQr(id,token,idUser){
+  let body = new URLSearchParams();
+  body.set('id', id);
+  body.set('token', token);
+  body.set('idUsuario',idUser);
+  let options = {
+    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
+  };
+  const req=this.http.post(this.baseApiUrl+'Personal/ObtenerQr',body.toString(), options)
+  .subscribe(res=>{ 
+    this.codigoQr= res[0].code; 
+  },
   err=>{console.log("Error ocurred")});
 }
 
