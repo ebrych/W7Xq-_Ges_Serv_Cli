@@ -24,6 +24,7 @@ import { MarcacionComponent } from './components/marcacion/marcacion.component';
 import { QRCodeModule } from 'angularx-qrcode';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
