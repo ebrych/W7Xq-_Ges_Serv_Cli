@@ -12,7 +12,8 @@
             <h5 class="mb-1">{{data.nombres}}</h5>
             <small>
               <i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-              <i class="fas fa-qrcode" (click)="CodigoQrById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+              &nbsp;
+              <i class="fas fa-qrcode" (click)="abrirModalCodigoQr(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
             </small>
         </div>
         <p class="mb-1"><i class="fas fa-address-card"></i> {{data.cargo}}</p>
@@ -130,10 +131,9 @@
           </button>
         </div>
         <div class="modal-body">
-          <label style="color:#bdc3c7">Codigo Qr</label>
-          <br/>
             <div class="container" align="center">
-                <qrcode [qrdata]="{{codigoQr}}" [size]="100%" [level]="'M'"></qrcode>
+              <label style="color:#bdc3c7">Codigo Qr</label>
+              <qrcode [qrdata]="codigoQr" [size]="250" [level]="'M'"></qrcode>
             </div>
           <p>&nbsp;</p>
         </div>

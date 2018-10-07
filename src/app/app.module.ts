@@ -22,7 +22,7 @@ import { AsistenciasComponent } from './components/asistencias/asistencias.compo
 import { TrabajoComponent } from './components/trabajo/trabajo.component';
 import { MarcacionComponent } from './components/marcacion/marcacion.component';
 import { QRCodeModule } from 'angularx-qrcode';
-import { ZXingScannerModule } from '@zxing/ngx-scanner';
+
 
 @NgModule({
   declarations: [
@@ -47,7 +47,6 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
     FormsModule,
     HttpClientModule,
     QRCodeModule,
-    ZXingScannerModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })
   ],
   providers: [LoginGuard,NoLoginGuard],

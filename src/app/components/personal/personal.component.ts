@@ -7,6 +7,9 @@ import { GlobalVariable } from '../../global';
 declare var jQuery:any;
 declare var $:any;
 
+interface QrData {
+  code : string
+}
 
 @Component({
   selector: 'app-personal',
@@ -14,9 +17,9 @@ declare var $:any;
   styles: []
 })
 export class PersonalComponent implements OnInit {
-
   constructor(private http:HttpClient,private router:Router) { }
   private baseApiUrl = GlobalVariable.BASE_API_URL;
+  
 
   groupList;
   localesList;
@@ -33,7 +36,7 @@ export class PersonalComponent implements OnInit {
   estIdUs;
   estUs;
 
-  codigoQr;
+  codigoQr="ninguno";
 
   id=localStorage.getItem('id');
   token=localStorage.getItem('token');
@@ -180,9 +183,10 @@ obtenerCodigoQr(id,token,idUser){
   let options = {
     headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
   };
-  const req=this.http.post(this.baseApiUrl+'Personal/ObtenerQr',body.toString(), options)
+  const req=this.http.post<QrData>(this.baseApiUrl+'Personal/ObtenerQr',body.toString(), options)
   .subscribe(res=>{ 
-    this.codigoQr= res[0].code; 
+    //this.codigoQr= res[0];
+    this.codigoQr=res.code;
   },
   err=>{console.log("Error ocurred")});
 }
