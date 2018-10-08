@@ -12,8 +12,6 @@
             <h5 class="mb-1">{{data.nombres}}</h5>
             <small>
               <i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
-              &nbsp;
-              <i class="fas fa-qrcode" (click)="abrirModalCodigoQr(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
             </small>
         </div>
         <p class="mb-1"><i class="fas fa-address-card"></i> {{data.cargo}}</p>
@@ -119,27 +117,6 @@
   </div>
 
 
-
-  <!-- Modal Codgio Qr -->
-<div class="modal fade" id="ModalCodigoQr" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editar</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-            <div class="container" align="center">
-              <label style="color:#bdc3c7">Codigo Qr</label>
-              <qrcode [qrdata]="codigoQr" [size]="250" [level]="'M'"></qrcode>
-            </div>
-          <p>&nbsp;</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
 
 

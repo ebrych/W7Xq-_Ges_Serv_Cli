@@ -54,11 +54,7 @@ export class PersonalComponent implements OnInit {
   abrirModalEditaRegistro(){
     $('#ModalEditaRegistro').modal('show');
   }
-
-  abrirModalCodigoQr(idUser){
-    this.obtenerCodigoQr(this.id,this.token,idUser);
-    $("#ModalCodigoQr").modal('show');
-  }
+ 
 
   //peticiones
   listarGrouList(id,token){
@@ -175,21 +171,7 @@ cargaCargos(id,token){
   err=>{console.log("Error ocurred")});
 }
 
-obtenerCodigoQr(id,token,idUser){
-  let body = new URLSearchParams();
-  body.set('id', id);
-  body.set('token', token);
-  body.set('idUsuario',idUser);
-  let options = {
-    headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
-  };
-  const req=this.http.post<QrData>(this.baseApiUrl+'Personal/ObtenerQr',body.toString(), options)
-  .subscribe(res=>{ 
-    //this.codigoQr= res[0];
-    this.codigoQr=res.code;
-  },
-  err=>{console.log("Error ocurred")});
-}
+
 
 
   

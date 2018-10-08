@@ -30,8 +30,7 @@
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
               "node_modules/list.js/dist/list.min.js",
-              "node_modules/bootstrap/dist/js/bootstrap.min.js",
-              //"http://localhost/GestionServicios/qr-scanner.min.js"
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
             ]
           },
           "configurations": {
