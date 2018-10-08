@@ -19,7 +19,20 @@
           filtros
         </div>
     </div>
-<br/>
-    
+
+    <p>&nbsp;</p>
+    <div class="list-group">
+        <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of relacionTrabajadores">
+        <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1">{{data.nombres}}</h5>
+            <small>
+            </small>
+        </div>
+        <p class="mb-1"><i class="fas fa-address-card"></i> {{data.cargo}}</p>
+        <p class="mb-1"><i class="fas fa-map-marker"></i> {{data.local}}</p>
+        <p class="mb-1"><i class="far fa-clock"></i> {{data.entrada}}</p> 
+        <p class="mb-1"><i class="far fa-clock"></i> {{data.salida}}</p> 
+        </div>
+  </div>
 
 </div> 
