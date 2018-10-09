@@ -1,6 +1,6 @@
 <p>&nbsp;</p>
 <div class="container">
-    <h1>Reporte de Productividad</h1> 
+    <h1>Reporte de Locales</h1> 
     <br/>
     <div class="row">
         <div class="col-sm">
@@ -21,14 +21,13 @@
 
     <p>&nbsp;</p>
     <div class="list-group">
-        <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of relacionTrabajadores">
+        <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of relacionLocales">
         <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">{{data.usuario}}</h5>
+            <h5 class="mb-1">{{data.nombre}}</h5>
             <small>
             </small>
         </div>
-        <p class="mb-1"><i class="fas fa-address-card"></i> {{data.cargo}}</p>
-        <p class="mb-1"><i class="fas fa-map-marker"></i> {{data.local}}</p>
+        <p class="mb-1"><i class="fas fa-map-marker"></i> {{data.direccion}}</p>
         <p class="mb-1"><i class="far fa-clock"></i> Actividad del mes: {{data.actividad}}</p> 
         </div>
   </div>

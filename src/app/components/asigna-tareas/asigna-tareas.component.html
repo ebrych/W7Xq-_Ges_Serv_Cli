@@ -69,8 +69,11 @@
             </select>
           <label>Fecha</label>  
           <input type="date" class="form-control" name="fecha" id="fecha"  ngModel="{{hoy}}" />
+          <label>Hora</label>  
+          <input type="time" class="form-control" name="hora" id="hora"  ngModel="{{hora}}" />
+           
           <label>Estados</label>
-            <select class="form-control" name="estado" id="estado" required ngModel>
+            <select class="form-control" name="estado" id="estado" required ngModel="1">
               <option value="1" selected>Activo</option>
               <option value="0">Inactivo</option>
             </select><br/>

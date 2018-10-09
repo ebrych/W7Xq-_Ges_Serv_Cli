@@ -13,6 +13,7 @@ import { ReservasComponent } from "./components/reservas/reservas.component";
 import { AsistenciasComponent } from "./components/asistencias/asistencias.component";
 import { TrabajoComponent } from "./components/trabajo/trabajo.component";
 import { MarcacionComponent } from "./components/marcacion/marcacion.component";
+import { RepoLocalComponent } from "./components/repo-local/repo-local.component";
 
 import { LoginGuard } from './login.guard';
 import { NoLoginGuard } from './no-login.guard';
@@ -31,6 +32,7 @@ const app_routes : Routes = [
    {path:'asistencias', component : AsistenciasComponent,canActivate:[LoginGuard]},
    {path:'trabajo', component : TrabajoComponent,canActivate:[LoginGuard]},
    {path:'marcacion',component:MarcacionComponent,canActivate:[LoginGuard]},
+   {path:'repo-local',component:RepoLocalComponent,canActivate:[LoginGuard]},
    {path:'**',pathMatch: 'full',redirectTo:'panel'}
 ];
 

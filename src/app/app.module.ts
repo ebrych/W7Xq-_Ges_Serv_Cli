@@ -22,6 +22,7 @@ import { AsistenciasComponent } from './components/asistencias/asistencias.compo
 import { TrabajoComponent } from './components/trabajo/trabajo.component';
 import { MarcacionComponent } from './components/marcacion/marcacion.component';
 import { QRCodeModule } from 'angularx-qrcode';
+import { RepoLocalComponent } from './components/repo-local/repo-local.component';
 
 
 @NgModule({
@@ -39,7 +40,8 @@ import { QRCodeModule } from 'angularx-qrcode';
     ReservasComponent,
     AsistenciasComponent,
     TrabajoComponent,
-    MarcacionComponent
+    MarcacionComponent,
+    RepoLocalComponent
   ],
   imports: [
     BrowserModule,

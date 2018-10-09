@@ -4,29 +4,25 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GlobalVariable } from '../../global';
 
- 
 @Component({
-  selector: 'app-asistencias',
-  templateUrl: './asistencias.component.html',
+  selector: 'app-repo-local',
+  templateUrl: './repo-local.component.html',
   styles: []
 })
-export class AsistenciasComponent implements OnInit {
+export class RepoLocalComponent implements OnInit {
 
   constructor(private http:HttpClient,private router:Router) { }
   private baseApiUrl = GlobalVariable.BASE_API_URL;
 
   date = new Date();
   hoy = this.obtenerFecha();
-
-  relacionTrabajadores;
-
+  relacionLocales;
   id=localStorage.getItem('id');
   token=localStorage.getItem('token');
 
   ngOnInit() {
     this.listarRelacion(this.hoy);
   }
-
 
 
   //calculos
@@ -51,7 +47,7 @@ export class AsistenciasComponent implements OnInit {
     return final;
   }
 
-
+  //peticiones
   listarRelacion(fecha){
     let body = new URLSearchParams();
     body.set('id', this.id);
@@ -60,10 +56,10 @@ export class AsistenciasComponent implements OnInit {
     let options = {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
-    const req=this.http.post(this.baseApiUrl+'Asistencia/listaAsistencias',body.toString(), options)
+    const req=this.http.post(this.baseApiUrl+'ReporteLocal/listLocales',body.toString(), options)
       .subscribe(res=>{ 
-        this.relacionTrabajadores=res
-        console.log(res);
+        this.relacionLocales=res
+        //console.log(res);
       },
       err=>{console.log("Error ocurred")});
   }
@@ -73,7 +69,4 @@ export class AsistenciasComponent implements OnInit {
   }
 
 
-
-
 }
- 

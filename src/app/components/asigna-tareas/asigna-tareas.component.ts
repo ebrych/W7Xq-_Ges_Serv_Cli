@@ -49,6 +49,7 @@ export class AsignaTareasComponent implements OnInit {
 
   date = new Date();
   hoy = this.obtenerFecha();
+  hora=this.obtenerHora();
   dateData;
 
   id=localStorage.getItem('id');
@@ -117,6 +118,13 @@ export class AsignaTareasComponent implements OnInit {
     var final=anio+'-'+mesStr+'-'+diaStr;
     //console.log(final);
     return final;
+  }
+
+  obtenerHora(){
+    var hora = this.date.getHours();
+    var min = this.date.getMinutes();
+    var time = hora+":"+min;
+    return time;
   }
 
   //peticiones
@@ -188,6 +196,7 @@ export class AsignaTareasComponent implements OnInit {
     body.set('token', this.token);
     body.set('cliente',form.value.cliente);
     body.set('fecha',form.value.fecha);
+    body.set('hora',form.value.hora);
     body.set('estado',form.value.estado);
     let options = {
       headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
