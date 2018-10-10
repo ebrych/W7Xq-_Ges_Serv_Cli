@@ -36,8 +36,9 @@ export class ReservasComponent implements OnInit {
   
   acepta(idRe){
     let body = new URLSearchParams();
-      body.set('id', id);
-      body.set('token', token);
+      body.set('id', this.id);
+      body.set('token', this.token);
+      body.set('reserva',idRe);
     let options = {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
@@ -48,8 +49,9 @@ export class ReservasComponent implements OnInit {
   
   rechaza(idRe){
     let body = new URLSearchParams();
-      body.set('id', id);
-      body.set('token', token);
+      body.set('id', this.id);
+      body.set('token', this.token);
+      body.set('reserva',idRe);
     let options = {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
