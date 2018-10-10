@@ -1,3 +1,21 @@
-<p>
-  reservas works!
-</p>
+<p>&nbsp;</p>
+<div class="container">
+    <h1>Reservas</h1> 
+    <p>&nbsp;</p>
+
+    <div class="list-group">
+      <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">{{data.descripcion}}</h5>
+          <small>
+            <i class="fas fa-check-circle" (click)="acepta(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+            &nbsp;&nbsp;
+            <i class="fas fa-ban" (click)="rechaza(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+          </small>
+        </div>
+        <p class="mb-1"><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+      </div>
+    </div>
+</div>
+
+
