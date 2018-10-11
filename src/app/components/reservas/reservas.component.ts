@@ -19,7 +19,7 @@ export class ReservasComponent implements OnInit {
   id=localStorage.getItem('id');
   token=localStorage.getItem('token');
   ngOnInit() {
-    listaReservas(this.id,this.token)
+    this.listaReservas(this.id,this.token)
   }
   
   listaReservas(id,token){
@@ -43,7 +43,10 @@ export class ReservasComponent implements OnInit {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
     const req=this.http.post(this.baseApiUrl+'Reservas/confirmReserva',body.toString(), options)
-      .subscribe(res=>{ this.groupList= res; },
+      .subscribe(res=>{
+        console.log(res); 
+        this.listaReservas(this.id,this.token);
+      },
       err=>{console.log("Error ocurred")});
   }
   
@@ -56,7 +59,9 @@ export class ReservasComponent implements OnInit {
         headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded')
     };
     const req=this.http.post(this.baseApiUrl+'Reservas/cancelaReserva',body.toString(), options)
-      .subscribe(res=>{ this.groupList= res; },
+      .subscribe(res=>{ 
+        this.listaReservas(this.id,this.token);
+      },
       err=>{console.log("Error ocurred")});
   }
   
