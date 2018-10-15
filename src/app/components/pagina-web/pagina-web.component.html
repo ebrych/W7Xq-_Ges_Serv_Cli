@@ -9,47 +9,175 @@
         <div class="card-header" id="headingOne">
           <h5 class="mb-0">
             <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-              Collapsible Group Item #1
+              <i class="fas fa-file-import" style="font-size:22px"></i> &nbsp;&nbsp;INFORMACIÓN
             </button>
           </h5>
         </div>
-    
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           <div class="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div style="font-size:20px;color:#007bff;cursor: pointer;" align="right" (click)="abrirModalNuevaEntrada()"><i class="fas fa-plus-circle"></i> Agregar entrada </div>
+            <p>&nbsp;</p>
+            <div class="container" *ngFor="let data of EntradasList">
+              <div class="row" >
+                <div class="col-sm-2">
+                  Titulo:<br/> {{data.titulo}}
+                </div>
+                <div class="col-sm-6">
+                  Descripción:<br/>  {{data.descripcion}}
+                </div>
+                <div class="col-sm-2">
+                  Orden:  {{data.orden}}
+                </div>
+                <div class="col-sm-2" align="right">
+                  <div style="color:#007bff;cursor: pointer;">
+                      <i class="fas fa-pencil-alt"  (click)="editEntrada(data.id)" style="font-size:20px;"></i>
+                      &nbsp;
+                      <i class="fas fa-trash-alt" (click)="deleteEntrada(data.id)" style="font-size:20px;"></i>
+                  </div>
+                </div>
+              </div>
+              <hr/>
+            </div>
+
           </div>
         </div>
       </div>
+
+
+
+
+
+
+
       <div class="card">
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
             <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-              Collapsible Group Item #2
+              <i class="fas fa-mail-bulk" style="font-size:22px"></i> &nbsp;&nbsp;CONTÁCTO
             </button>
           </h5>
         </div>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
           <div class="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="card-header" id="headingThree">
-          <h5 class="mb-0">
-            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-              Collapsible Group Item #3
-            </button>
-          </h5>
-        </div>
-        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-          <div class="card-body">
-            Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm">
+                      <div class="col-sm">Numero de Telefono: {{numeroTef}}</div>
+                      <div class="col-sm">Mail de Contácto: {{emailCont}}</div>
+                      <div class="col-sm">Link de Facebook: {{facebook}}</div>
+                      <div class="col-sm">Link de Instagram: {{instagram}}</div>
+                    </div>
+                    <div class="col-sm" align="right">
+                      <div style="color:#007bff;cursor: pointer;">
+                        <i class="fas fa-pencil-alt" style="font-size:24px;" (click)="editarIndoContacto()" ></i>
+                      </div>
+                    </div>
+                </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    
-
-
 </div>
+
+
+
+
+
+
+<!-- Modal Registrar Entrada-->
+<div class="modal fade" id="ModalRegistroEntrada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Local</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label style="color:#bdc3c7">Registrar Entrada</label>
+        <br/>
+
+        <form #nuevaEntradaForm="ngForm" (ngSubmit)="insertaEntrada(nuevaEntradaForm)">
+            <label>Titulo</label>
+            <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo de la entrada" required ngModel>
+            <label>Descripción</label>
+            <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required ngModel></textarea>
+            <label>Orden</label>
+            <input type="number" class="form-control" name="orden" id="orden" placeholder="Orden" required ngModel>
+            <br/>
+            <button class="btn btn-primary btn-block" type="submit">Agregar Entrada</button> 
+        </form>
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal editar Entrada-->
+<div class="modal fade" id="ModalEditaEntrada" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Nuevo Local</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <label style="color:#bdc3c7">Editar Entrada</label>
+        <br/>
+        <form #actualizaEntradaForm="ngForm" (ngSubmit)="actualizaEntrada(actualizaEntradaForm)">
+            <input type="text" class="form-control" name="idEntrada" id="idEntrada" style="display:none"  required ngModel={{idEntrada}}>
+            <label>Titulo</label>
+            <input type="text" class="form-control" name="titulo" id="titulo" placeholder="Titulo de la entrada" required ngModel={{tituloEntrada}}>
+            <label>Descripción</label>
+            <textarea class="form-control" name="descripcion" id="descripcion" rows="3" required ngModel={{descripEntrada}}></textarea>
+            <label>Orden</label>
+            <input type="number" class="form-control" name="orden" id="orden" placeholder="Orden" required ngModel={{ordenEntrada}}>
+            <br/>
+            <button class="btn btn-primary btn-block" type="submit">Guardar</button> 
+        </form>
+        
+        <p>&nbsp;</p> 
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- Modal editar Contacto-->
+<div class="modal fade" id="ModalEditaContacto" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Nuevo Local</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <label style="color:#bdc3c7">Editar Entrada</label>
+          <br/>
+          <form #actualizaContactoForm="ngForm" (ngSubmit)="actualizaContacto(actualizaContactoForm)">
+              <label>Telefono</label>
+              <input type="text" class="form-control" name="numero" id="numero"  required ngModel={{numeroTef}}>
+              <label>Email</label>
+              <input type="email" class="form-control" name="email" id="email"  required ngModel={{emailCont}}>
+              <label>Dirección de Facebook</label>
+              <input type="text" class="form-control" name="facebook" id="facebook" required ngModel={{facebook}}>
+              <label>Dirección de Instagram</label>
+              <input type="text" class="form-control" name="instagram" id="instagram" required ngModel={{instagram}}>
+              <br/>
+              <button class="btn btn-primary btn-block" type="submit">Guardar</button> 
+          </form>
+          
+          <p>&nbsp;</p> 
+        </div>
+      </div>
+    </div>
+  </div>

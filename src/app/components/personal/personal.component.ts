@@ -85,9 +85,8 @@ export class PersonalComponent implements OnInit {
     const req=this.http.post(this.baseApiUrl+'Personal/agregarUsuario',body.toString(), options)
     .subscribe(res=>{
         //logica
-        if(res==true){
-          window.location.reload();
-        }
+        $('#ModalRegistro').modal('hide');
+        this.listarGrouList(this.id,this.token);
     },
     err=>{console.log("Error ocurred")});
     console.log(body.toString());
@@ -140,9 +139,8 @@ actualiza(form:NgForm){
 const req=this.http.post(this.baseApiUrl+'Personal/updatePersonal',body.toString(), options)
   .subscribe(res=>{
       //logica
-      if(res==true){
-        window.location.reload();
-      }
+      $('#ModalEditaRegistro').modal('hide');
+      this.listarGrouList(this.id,this.token);
   },
   err=>{console.log("Error ocurred")});
 }

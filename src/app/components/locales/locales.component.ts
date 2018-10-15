@@ -71,12 +71,11 @@ export class LocalesComponent implements OnInit {
       const req=this.http.post(this.baseApiUrl+'Locales/insertLocal',body.toString(), options)
       .subscribe(res=>{
           //logica
-          if(res==true){
-            window.location.reload();
-          }
+          $('#ModalRegistro').modal('hide');
+          this.listarGrouList(this.id,this.token);
       },
       err=>{console.log("Error ocurred")});
-      console.log(body.toString());
+  
   }
 
   buscarById(id){
@@ -118,9 +117,9 @@ export class LocalesComponent implements OnInit {
     const req=this.http.post(this.baseApiUrl+'Locales/updateLocal',body.toString(), options)
       .subscribe(res=>{
           //logica
-          if(res==true){
-            window.location.reload();
-          }
+          $('#ModalEdicion').modal('hide');
+          this.listarGrouList(this.id,this.token);
+          
       },
       err=>{console.log("Error ocurred")});
   }
