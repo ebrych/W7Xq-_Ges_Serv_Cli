@@ -1,27 +1,21 @@
-
- <label>Fecha:</label>
-            <form #listaForm="ngForm" (ngSubmit)="llamarLista(listaForm)" class="form-inline">
-              <input type="date"  class="form-control" name="dateData" id="dateData" [(ngModel)]="hoy">
-              <button type="submit" class="btn btn-primary ">buscar</button>
-            </form>
-
-
-
-
-
-<form #listaForm="ngForm" (ngSubmit)="llamarLista(listaForm)">
-                <div class="col-sm-6">
-                    <input type="date"  class="form-control" name="dateData" id="dateData" [(ngModel)]="hoy">
+<div class="list">
+            <div class="list-group">
+                <div class="row" align="right">
+                    <input class="search form-control" placeholder="Busqueda en la lista" style="width:90%" />
                 </div>
-                <div class="col-sm-6">
-                    <button type="submit" class="btn btn-primary" style="width: 100%">buscar</button>
+                <br/>
+                <div href="#" class="list-group-item list-group-item-action flex-column align-items-start" *ngFor="let data of groupList">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1" class="nombre">{{data.nombres}}</h5>
+                    <small>
+                      <i class="fas fa-pen" (click)="buscarById(data.id)" style="font-size: 20px;color:#007bff;cursor: pointer;"></i>
+                    </small>
                 </div>
-            </form>
-
-
-
-
-
-else if(res[0].datos == 0){
-        $('#modalBody').html('Tarea Cancelada');
-      }
+                <p class="mb-1" class="cargo"><i class="fas fa-address-card"></i> {{data.cargo}}</p>
+                <p class="mb-1" class="local"><i class="fas fa-map-marker"></i> {{data.local}}</p>
+                <p class="mb-1"><i class="fas fa-at"></i> {{data.email}}</p>
+                <p class="mb-1"><i class="fas fa-phone-square"></i> {{data.telefono}}</p>
+                <p class="mb-1" class="estado" ><i class="fab fa-font-awesome-flag"></i> {{data.estado}}</p>
+                </div>
+              </div>
+        </div>

@@ -6,10 +6,8 @@ import { GlobalVariable } from '../../global';
 
 declare var jQuery:any;
 declare var $:any;
+declare var List:any;
 
-interface QrData {
-  code : string
-}
 
 @Component({
   selector: 'app-personal',
@@ -43,6 +41,10 @@ export class PersonalComponent implements OnInit {
 
   ngOnInit() {
     this.listarGrouList(this.id,this.token);
+    var options = {
+      valueNames: [ 'nombre', 'cargo','local','estado' ]
+    };
+    var hackerList = new List('list', options);
   }
 
   abrirModalRegistro(){
