@@ -19,3 +19,15 @@
                 </div>
               </div>
         </div>
+
+
+
+
+         <li>
+         <h3 class="nombre">Jonny</h3>
+         <p class="cargo">Stockholm</p>
+      </li>
+      <li>
+        <h3 class="name">Jonas</h3>
+        <p class="cargo">Berlin</p>
+      </li>

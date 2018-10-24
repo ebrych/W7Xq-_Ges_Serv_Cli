@@ -41,10 +41,7 @@ export class PersonalComponent implements OnInit {
 
   ngOnInit() {
     this.listarGrouList(this.id,this.token);
-    var options = {
-      valueNames: [ 'nombre', 'cargo','local','estado' ]
-    };
-    var hackerList = new List('list', options);
+    this.iniciarListJS();
   }
 
   abrirModalRegistro(){
@@ -57,7 +54,13 @@ export class PersonalComponent implements OnInit {
     $('#ModalEditaRegistro').modal('show');
   }
  
-
+  //listJs
+  iniciarListJS(){
+    var options = {
+      valueNames: [ 'nombre', 'cargo' ]
+    };
+    var lista = new List('lista', options,this.groupList);
+  }
   //peticiones
   listarGrouList(id,token){
     let body = new URLSearchParams();

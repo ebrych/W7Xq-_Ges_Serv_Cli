@@ -5,20 +5,12 @@
   <div style="font-size:20px;color:#007bff;cursor: pointer;" (click)="abrirModalRegistro()"><i class="fas fa-plus-circle"></i> Agregar Personal </div>
  
 <p>&nbsp;</p>
-
-    <div id="list">
-        <div class="form-inline" align="right"><label style="color:#636e72"> <i class="fas fa-search"></i> Filtrar: &nbsp;&nbsp;</label><input class="search form-control" placeholder="Busqueda en la lista" /></div>
-        <ul class="list">
-            <li>
-                <h3 class="nombre">Jonny</h3>
-                <p class="cargo">Stockholm</p>
-             </li>
-             <li>
-               <h3 class="nombre">Jonas</h3>
-               <p class="cargo">Berlin</p>
-             </li>
-        </ul>
-    </div>
+<div id="lista">
+    <input class="search" />
+    <ul class="list" *ngFor="let data of groupList">
+        <h3 class="nombre">Jonny</h3>
+    </ul>
+  </div>
 
 </div>
 
